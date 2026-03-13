@@ -28,11 +28,13 @@ final class RemoteInferenceService {
     /// - Parameters:
     ///   - view:       The ARView to snapshot (already in screen orientation).
     ///   - circleRect: Circle bounding rect in view coordinates.
-    ///   - completion: `(label, confidence)` on success; `("Error", 0)` on failure.
+    ///   - completion: `.success((label, confidence))` on success;
+    ///                 `.failure(InferenceError)` when the host is unreachable,
+    ///                 the server returns a non-2xx status, or decoding fails.
     func detect(
         in view: ARView,
         circleRect: CGRect,
-        completion: @escaping (String, Float) -> Void
+        completion: @escaping (Result<(String, Float), InferenceError>) -> Void
     ) {
         // Render view to image (synchronous, on main thread)
         let renderer = UIGraphicsImageRenderer(bounds: view.bounds)
@@ -44,7 +46,7 @@ final class RemoteInferenceService {
         guard let cgFull = snapshot.cgImage,
               let cgCrop = cgFull.cropping(to: circleRect),
               let jpegData = UIImage(cgImage: cgCrop).jpegData(compressionQuality: 0.85) else {
-            DispatchQueue.main.async { completion("Error", 0) }
+            DispatchQueue.main.async { completion(.failure(.snapshotFailed)) }
             return
         }
 
@@ -53,13 +55,13 @@ final class RemoteInferenceService {
             case .success(let response):
                 guard let best = response.detections
                     .max(by: { $0.confidence < $1.confidence }) else {
-                    DispatchQueue.main.async { completion("No objects", 0) }
+                    DispatchQueue.main.async { completion(.failure(.noDetections)) }
                     return
                 }
-                DispatchQueue.main.async { completion(best.className, best.confidence) }
+                DispatchQueue.main.async { completion(.success((best.className, best.confidence))) }
 
-            case .failure:
-                DispatchQueue.main.async { completion("Server error", 0) }
+            case .failure(let error):
+                DispatchQueue.main.async { completion(.failure(error)) }
             }
         }
     }

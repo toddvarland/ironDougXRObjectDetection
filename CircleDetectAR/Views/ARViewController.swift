@@ -57,6 +57,9 @@ final class ARViewController: UIViewController {
     /// Depth (metres) at the last circle centre — captured before async classify.
     private var lastCircleDepth: Float?
 
+    /// Prevents stacking multiple "host unreachable" alerts if the user keeps drawing circles.
+    private var isShowingRemoteErrorAlert = false
+
     #if DEBUG
     private var debugManager: DebugOverlayManager?
     #endif
@@ -246,9 +249,14 @@ final class ARViewController: UIViewController {
 
         if SettingsManager.shared.useRemoteInference {
             // ── Remote YOLO11 path ──────────────────────────────────────────
-            RemoteInferenceService.shared.detect(in: arView, circleRect: rect) { [weak self] label, confidence in
+            RemoteInferenceService.shared.detect(in: arView, circleRect: rect) { [weak self] result in
                 guard let self else { return }
-                self.handleInferenceResult(label: label, confidence: confidence)
+                switch result {
+                case .success(let (label, confidence)):
+                    self.handleInferenceResult(label: label, confidence: confidence)
+                case .failure(let error):
+                    self.handleRemoteInferenceError(error)
+                }
             }
         } else {
             // ── On-device CoreML / Vision path ──────────────────────────────
@@ -282,6 +290,46 @@ final class ARViewController: UIViewController {
             notificationFeedback.notificationOccurred(.success)
         }
         UIAccessibility.post(notification: .announcement, argument: item.displayText)
+    }
+
+    /// Called on the main thread when the remote inference server is unreachable or returns an error.
+    /// Shows a `UIAlertController` once at a time so repeated circles don't stack alerts.
+    private func handleRemoteInferenceError(_ error: RemoteInferenceService.InferenceError) {
+        guard !isShowingRemoteErrorAlert else { return }
+        isShowingRemoteErrorAlert = true
+
+        let title: String
+        let message: String
+
+        switch error {
+        case .networkError(let underlying):
+            title = "Remote Server Unreachable"
+            let desc = (underlying as? URLError)?.localizedDescription ?? underlying.localizedDescription
+            message = "Could not reach the inference server.\n\n\(desc)\n\nCheck that the server is running and the URL in Settings is correct."
+        case .badResponse(let statusCode):
+            title = "Server Error"
+            message = "The inference server returned an unexpected response (HTTP \(statusCode)). Check the server logs."
+        case .snapshotFailed:
+            title = "Snapshot Failed"
+            message = "Unable to capture the camera frame for remote inference."
+        case .noDetections:
+            // Not really an error worth alerting about — silently ignore.
+            isShowingRemoteErrorAlert = false
+            return
+        case .decodingError:
+            title = "Response Error"
+            message = "The server response could not be decoded. The server may be running an incompatible version."
+        }
+
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Switch to On-Device", style: .default) { [weak self] _ in
+            SettingsManager.shared.useRemoteInference = false
+            self?.isShowingRemoteErrorAlert = false
+        })
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel) { [weak self] _ in
+            self?.isShowingRemoteErrorAlert = false
+        })
+        present(alert, animated: true)
     }
 
     // MARK: - Debug (DEBUG builds only)
