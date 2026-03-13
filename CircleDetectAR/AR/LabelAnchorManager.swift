@@ -45,14 +45,16 @@ final class LabelAnchorManager {
         )
         let material = SimpleMaterial(color: .white, isMetallic: false)
         let textEntity = ModelEntity(mesh: textMesh, materials: [material])
-        textEntity.components[BillboardComponent.self] = BillboardComponent()
+        if #available(iOS 18.0, *) {
+            textEntity.components[BillboardComponent.self] = BillboardComponent()
+        }
 
         let anchor = AnchorEntity(world: transform)
         anchor.addChild(textEntity)
         arView.scene.addAnchor(anchor)
         activeAnchors.append(anchor)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + displayDuration) { [weak self, weak arView] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + displayDuration) { [weak self] in
             anchor.removeFromParent()
             self?.activeAnchors.removeAll { $0 === anchor }
         }

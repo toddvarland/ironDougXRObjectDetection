@@ -19,15 +19,35 @@ final class ARViewController: UIViewController {
     /// Centre point of the last completed circle gesture, in arView coordinates.
     private var lastCircleCenter: CGPoint = .zero
 
+    /// Subtle status banner shown when tracking quality degrades.
+    private lazy var trackingStatusLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.backgroundColor = UIColor.systemRed.withAlphaComponent(0.8)
+        label.font = .boldSystemFont(ofSize: 13)
+        label.textAlignment = .center
+        label.layer.cornerRadius = 8
+        label.clipsToBounds = true
+        label.isHidden = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+    private let notificationFeedback = UINotificationFeedbackGenerator()
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupARView()
         setupOverlay()
+        setupTrackingStatusLabel()
         setupGesture()
         setupCoachingOverlay()
         checkCameraPermission()
+        impactFeedback.prepare()
+        notificationFeedback.prepare()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -48,12 +68,24 @@ final class ARViewController: UIViewController {
         arView.accessibilityIdentifier = "ARViewContainer"
         view.addSubview(arView)
         sessionManager = ARSessionManager(arView: arView)
+        arView.session.delegate = self
     }
 
     private func setupOverlay() {
         overlayView = CircleOverlayView(frame: view.bounds)
         overlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(overlayView)
+    }
+
+    private func setupTrackingStatusLabel() {
+        view.addSubview(trackingStatusLabel)
+        NSLayoutConstraint.activate([
+            trackingStatusLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            trackingStatusLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            trackingStatusLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.9),
+            trackingStatusLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 32)
+        ])
+        trackingStatusLabel.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
     }
 
     private func setupGesture() {
@@ -84,10 +116,14 @@ final class ARViewController: UIViewController {
 
         case .ended:
             overlayView.path = nil
+            impactFeedback.impactOccurred()   // short tap confirms gesture accepted
             processCircle(from: recognizer)
 
-        default:
+        case .failed, .cancelled:
             overlayView.path = nil
+
+        default:
+            break
         }
     }
 
@@ -117,6 +153,7 @@ final class ARViewController: UIViewController {
             guard let self else { return }
             let text = "\(label) (\(Int(confidence * 100))%)"
             self.anchorManager.placeLabel(text, at: self.lastCircleCenter, in: self.arView)
+            self.notificationFeedback.notificationOccurred(.success)
             UIAccessibility.post(notification: .announcement, argument: text)
         }
     }
@@ -151,5 +188,64 @@ final class ARViewController: UIViewController {
         })
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
+    }
+}
+
+// MARK: - ARSessionDelegate
+
+extension ARViewController: ARSessionDelegate {
+
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        switch camera.trackingState {
+        case .normal:
+            hideTrackingStatus()
+        case .notAvailable:
+            showTrackingStatus("AR tracking unavailable", color: .systemRed)
+        case .limited(let reason):
+            showTrackingStatus(trackingMessage(for: reason), color: .systemOrange)
+        }
+    }
+
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        showTrackingStatus("AR session error — restarting…", color: .systemRed)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            self?.sessionManager.start()
+        }
+    }
+
+    func sessionWasInterrupted(_ session: ARSession) {
+        showTrackingStatus("Session interrupted", color: .systemOrange)
+    }
+
+    func sessionInterruptionEnded(_ session: ARSession) {
+        hideTrackingStatus()
+        sessionManager.start()
+    }
+
+    // MARK: Private helpers
+
+    private func showTrackingStatus(_ message: String, color: UIColor) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.trackingStatusLabel.text = "  \(message)  "
+            self.trackingStatusLabel.backgroundColor = color.withAlphaComponent(0.8)
+            self.trackingStatusLabel.isHidden = false
+        }
+    }
+
+    private func hideTrackingStatus() {
+        DispatchQueue.main.async { [weak self] in
+            self?.trackingStatusLabel.isHidden = true
+        }
+    }
+
+    private func trackingMessage(for reason: ARCamera.TrackingState.Reason) -> String {
+        switch reason {
+        case .initializing:          return "Initializing AR…"
+        case .relocalizing:          return "Relocalizing…"
+        case .excessiveMotion:       return "Slow down — too much motion"
+        case .insufficientFeatures:  return "Point at a textured surface"
+        @unknown default:            return "Limited tracking"
+        }
     }
 }
