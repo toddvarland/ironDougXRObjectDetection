@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0694BB5D7CF7867D3BC098E7 /* ResultHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6D8BBC0A5F15A148D11863 /* ResultHistoryViewController.swift */; };
 		0E6BCAF4E88839EDBDC2744F /* ARSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA32126F8FB2DCE92970C49 /* ARSessionManager.swift */; };
+		11459DEA65733945886A993A /* SettingsManagerTests.swift.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0BE337E351D6FB2EF3DCCC9E /* SettingsManagerTests.swift.plist */; };
 		1EBC4339660FA7A4A5376A45 /* CircleDetectARUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938E819E15AE561C9A8941FC /* CircleDetectARUITests.swift */; };
 		22921B0E2F88A98BD33CD612 /* DepthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BED788F4EEB5B1157A026F9 /* DepthService.swift */; };
 		23002277D7BC864D4DAE277B /* ModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966654349D2C43169CE78E7 /* ModelService.swift */; };
@@ -30,6 +31,7 @@
 		CF07AAEE7358E8A85C6CD01E /* DepthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814EFADAAFE6A306961D74D3 /* DepthServiceTests.swift */; };
 		E1AA8C6C9290573E921086FA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FB6E40097FE34E369E6AB19F /* README.md */; };
 		E747DE8891489BEECAA48750 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B81664C0775C148B8DC85F /* SceneDelegate.swift */; };
+		E926C09E8F0723EE9B5396D2 /* MobileNetV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3AE72729FF2431543F52BA29 /* MobileNetV2.mlmodel */; };
 		EA203C3DAE67ED572CFA47B3 /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85EEAA259F1E04B2E20E850F /* Vision.framework */; };
 		F0DCB51CBEDC59AF758F31B4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D0DF757F253E41D1E0DD28 /* AVFoundation.framework */; };
 		F12F7DABD954D000ECDFE694 /* DebugOverlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30789B9AD0A44172AB88A5AE /* DebugOverlayManager.swift */; };
@@ -58,11 +60,13 @@
 		01311CD772A71EEA33E74816 /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
 		04AAFB0CFD7483FE54C6C958 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		085A0E85578B17AD21380BEA /* ClassificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationService.swift; sourceTree = "<group>"; };
+		0BE337E351D6FB2EF3DCCC9E /* SettingsManagerTests.swift.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = SettingsManagerTests.swift.plist; sourceTree = "<group>"; };
 		0DA32126F8FB2DCE92970C49 /* ARSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionManager.swift; sourceTree = "<group>"; };
 		1BED788F4EEB5B1157A026F9 /* DepthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthService.swift; sourceTree = "<group>"; };
 		2CEF6393E1E2C85F0DF48B68 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
 		30789B9AD0A44172AB88A5AE /* DebugOverlayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugOverlayManager.swift; sourceTree = "<group>"; };
 		3520EBC3EB0C9DA3E56DB651 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3AE72729FF2431543F52BA29 /* MobileNetV2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2.mlmodel; sourceTree = "<group>"; };
 		3B8EA296555D75FD72CD7AE8 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		40D0DF757F253E41D1E0DD28 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4DD80889B5C65096B42DC89D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -136,6 +140,7 @@
 		1D844DE8F4C6525402EE9CA6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3AE72729FF2431543F52BA29 /* MobileNetV2.mlmodel */,
 				FB6E40097FE34E369E6AB19F /* README.md */,
 			);
 			path = Models;
@@ -171,6 +176,7 @@
 				814EFADAAFE6A306961D74D3 /* DepthServiceTests.swift */,
 				B71FB54A7CA929883CD65AEE /* ResultHistoryManagerTests.swift */,
 				C42C3BE439B6A392D3BD1301 /* SettingsManagerTests.swift */,
+				0BE337E351D6FB2EF3DCCC9E /* SettingsManagerTests.swift.plist */,
 			);
 			path = CircleDetectARTests;
 			sourceTree = "<group>";
@@ -266,6 +272,7 @@
 			buildConfigurationList = 4C6B8AF358030341384D5338 /* Build configuration list for PBXNativeTarget "CircleDetectARTests" */;
 			buildPhases = (
 				C88A226DC1CAFDF7527A0306 /* Sources */,
+				299C531B33A712C720183776 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -333,6 +340,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		299C531B33A712C720183776 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11459DEA65733945886A993A /* SettingsManagerTests.swift.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		63B57621F9E68102751549F1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -378,6 +393,7 @@
 				F12F7DABD954D000ECDFE694 /* DebugOverlayManager.swift in Sources */,
 				22921B0E2F88A98BD33CD612 /* DepthService.swift in Sources */,
 				907A8BF792541B825CDE1034 /* LabelAnchorManager.swift in Sources */,
+				E926C09E8F0723EE9B5396D2 /* MobileNetV2.mlmodel in Sources */,
 				23002277D7BC864D4DAE277B /* ModelService.swift in Sources */,
 				F8566DEFCC4B0DC5185DAB26 /* ResultHistoryManager.swift in Sources */,
 				0694BB5D7CF7867D3BC098E7 /* ResultHistoryViewController.swift in Sources */,
