@@ -190,6 +190,7 @@ final class ARViewController: UIViewController {
     private func setupGesture() {
         let gesture = CircleGestureRecognizer(target: self,
                                               action: #selector(handleGestureStateChange(_:)))
+        gesture.delegate = self
         view.addGestureRecognizer(gesture)
     }
 
@@ -420,5 +421,23 @@ extension ARViewController: ARCoachingOverlayViewDelegate {
         // Coaching active — let the overlay receive touches so the user can interact with it.
         coachingOverlayView.isUserInteractionEnabled = true
         UIView.animate(withDuration: 0.3) { self.hintLabel.alpha = 0 }
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+
+extension ARViewController: UIGestureRecognizerDelegate {
+
+    /// Allow the circle gesture to start — unless the touch lands on a UIControl
+    /// (button, switch, etc.), in which case let the control handle it exclusively.
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldReceive touch: UITouch) -> Bool {
+        // Walk up the hit-test chain; if we find a UIControl, refuse the touch.
+        var hitView = touch.view
+        while let v = hitView {
+            if v is UIControl { return false }
+            hitView = v.superview
+        }
+        return true
     }
 }
