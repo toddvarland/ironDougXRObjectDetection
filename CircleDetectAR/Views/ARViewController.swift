@@ -69,9 +69,9 @@ final class ARViewController: UIViewController {
         setupOverlay()
         setupTrackingStatusLabel()
         setupHintLabel()
-        setupToolbar()
         setupGesture()
-        setupCoachingOverlay()
+        setupCoachingOverlay()  // must come before toolbar so buttons sit above it
+        setupToolbar()
         checkCameraPermission()
         impactFeedback.prepare()
         notificationFeedback.prepare()
@@ -200,6 +200,9 @@ final class ARViewController: UIViewController {
         coaching.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         coaching.frame = view.bounds
         coaching.goal = .anyPlane
+        // Don't let the coaching overlay eat touches when it isn't active.
+        // The delegate callbacks (below) toggle this as coaching starts/stops.
+        coaching.isUserInteractionEnabled = false
         // Suppress during UI automation tests
         if CommandLine.arguments.contains("--uitesting") {
             coaching.isHidden = true
@@ -408,12 +411,14 @@ extension ARViewController: ARSessionDelegate {
 extension ARViewController: ARCoachingOverlayViewDelegate {
 
     func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
-        // Coaching finished — reveal the hint label so users know what to do next.
+        // Coaching finished — buttons should be tappable again.
+        coachingOverlayView.isUserInteractionEnabled = false
         showHint()
     }
 
     func coachingOverlayViewWillActivate(_ coachingOverlayView: ARCoachingOverlayView) {
-        // Hide hint while coaching is active to avoid UI clutter.
+        // Coaching active — let the overlay receive touches so the user can interact with it.
+        coachingOverlayView.isUserInteractionEnabled = true
         UIView.animate(withDuration: 0.3) { self.hintLabel.alpha = 0 }
     }
 }
