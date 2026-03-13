@@ -54,6 +54,9 @@ final class ARViewController: UIViewController {
     /// Whether the user has completed at least one successful circle gesture.
     private var hasCircledOnce = false
 
+    /// Depth (metres) at the last circle centre — captured before async classify.
+    private var lastCircleDepth: Float?
+
     #if DEBUG
     private var debugManager: DebugOverlayManager?
     #endif
@@ -66,6 +69,7 @@ final class ARViewController: UIViewController {
         setupOverlay()
         setupTrackingStatusLabel()
         setupHintLabel()
+        setupToolbar()
         setupGesture()
         setupCoachingOverlay()
         checkCameraPermission()
@@ -120,11 +124,56 @@ final class ARViewController: UIViewController {
     private func setupHintLabel() {
         view.addSubview(hintLabel)
         NSLayoutConstraint.activate([
-            hintLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
+            hintLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -68),
             hintLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             hintLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.85),
             hintLabel.heightAnchor.constraint(equalToConstant: 44)
         ])
+    }
+
+    private func setupToolbar() {
+        let historyButton = UIButton(type: .system)
+        historyButton.setImage(UIImage(systemName: "clock"), for: .normal)
+        historyButton.tintColor = .white
+        historyButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        historyButton.layer.cornerRadius = 22
+        historyButton.clipsToBounds = true
+        historyButton.accessibilityLabel = "Detection History"
+        historyButton.addTarget(self, action: #selector(showHistory), for: .touchUpInside)
+        historyButton.translatesAutoresizingMaskIntoConstraints = false
+
+        let settingsButton = UIButton(type: .system)
+        settingsButton.setImage(UIImage(systemName: "gearshape"), for: .normal)
+        settingsButton.tintColor = .white
+        settingsButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        settingsButton.layer.cornerRadius = 22
+        settingsButton.clipsToBounds = true
+        settingsButton.accessibilityLabel = "Settings"
+        settingsButton.addTarget(self, action: #selector(showSettings), for: .touchUpInside)
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(historyButton)
+        view.addSubview(settingsButton)
+
+        NSLayoutConstraint.activate([
+            historyButton.widthAnchor.constraint(equalToConstant: 44),
+            historyButton.heightAnchor.constraint(equalToConstant: 44),
+            historyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            historyButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+
+            settingsButton.widthAnchor.constraint(equalToConstant: 44),
+            settingsButton.heightAnchor.constraint(equalToConstant: 44),
+            settingsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            settingsButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+        ])
+    }
+
+    @objc private func showHistory() {
+        ResultHistoryViewController.show(from: self)
+    }
+
+    @objc private func showSettings() {
+        SettingsViewController.show(from: self)
     }
 
     func showHint() {
@@ -168,7 +217,7 @@ final class ARViewController: UIViewController {
 
         case .ended:
             overlayView.path = nil
-            impactFeedback.impactOccurred()   // short tap confirms gesture accepted
+            if SettingsManager.shared.hapticsEnabled { impactFeedback.impactOccurred() }
             hideHintPermanently()
             processCircle(from: recognizer)
 
@@ -186,12 +235,10 @@ final class ARViewController: UIViewController {
 
         guard let currentFrame = arView.session.currentFrame else { return }
 
-        // Log depth to circled object if LiDAR is available
-        if let depth = DepthService.readDepth(from: currentFrame,
-                                               at: lastCircleCenter,
-                                               viewSize: arView.bounds.size) {
-            print("Depth to object: \(String(format: "%.2f", depth)) m")
-        }
+        // Capture LiDAR depth at circle centre
+        lastCircleDepth = DepthService.readDepth(from: currentFrame,
+                                                  at: lastCircleCenter,
+                                                  viewSize: arView.bounds.size)
 
         // Convert screen rect → normalised Vision ROI
         let viewSize = arView.bounds.size
@@ -204,10 +251,24 @@ final class ARViewController: UIViewController {
             regionOfInterest: normalizedROI
         ) { [weak self] label, confidence in
             guard let self else { return }
-            let text = "\(label) (\(Int(confidence * 100))%)"
-            self.anchorManager.placeLabel(text, at: self.lastCircleCenter, in: self.arView)
-            self.notificationFeedback.notificationOccurred(.success)
-            UIAccessibility.post(notification: .announcement, argument: text)
+
+            // Respect confidence threshold
+            guard confidence >= SettingsManager.shared.confidenceThreshold else { return }
+
+            let depth = self.lastCircleDepth
+            let item  = ResultItem(label: label,
+                                   confidence: confidence,
+                                   depth: SettingsManager.shared.showDepth ? depth : nil,
+                                   timestamp: Date())
+            ResultHistoryManager.shared.add(item)
+
+            self.anchorManager.placeLabel(item.displayText,
+                                          at: self.lastCircleCenter,
+                                          in: self.arView)
+            if SettingsManager.shared.hapticsEnabled {
+                self.notificationFeedback.notificationOccurred(.success)
+            }
+            UIAccessibility.post(notification: .announcement, argument: item.displayText)
         }
     }
 

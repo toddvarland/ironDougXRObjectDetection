@@ -18,9 +18,6 @@ schemes:
       targets:
         - CircleDetectARTests
         - CircleDetectARUITests
-      testPlans:
-        - path: CircleDetectAR.xctestplan
-          defaultPlan: true
     run:
       config: Debug
     archive:
