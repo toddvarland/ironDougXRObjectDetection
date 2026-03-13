@@ -36,6 +36,28 @@ final class ARViewController: UIViewController {
     private let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
     private let notificationFeedback = UINotificationFeedbackGenerator()
 
+    /// "Draw a circle…" prompt shown after coaching completes and hidden after first use.
+    private lazy var hintLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Draw a circle around any object"
+        label.textColor = .white
+        label.backgroundColor = UIColor.black.withAlphaComponent(0.55)
+        label.font = .systemFont(ofSize: 15, weight: .medium)
+        label.textAlignment = .center
+        label.layer.cornerRadius = 14
+        label.clipsToBounds = true
+        label.alpha = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    /// Whether the user has completed at least one successful circle gesture.
+    private var hasCircledOnce = false
+
+    #if DEBUG
+    private var debugManager: DebugOverlayManager?
+    #endif
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -43,11 +65,15 @@ final class ARViewController: UIViewController {
         setupARView()
         setupOverlay()
         setupTrackingStatusLabel()
+        setupHintLabel()
         setupGesture()
         setupCoachingOverlay()
         checkCameraPermission()
         impactFeedback.prepare()
         notificationFeedback.prepare()
+        #if DEBUG
+        setupDebugGesture()
+        #endif
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +95,9 @@ final class ARViewController: UIViewController {
         view.addSubview(arView)
         sessionManager = ARSessionManager(arView: arView)
         arView.session.delegate = self
+        #if DEBUG
+        debugManager = DebugOverlayManager(arView: arView)
+        #endif
     }
 
     private func setupOverlay() {
@@ -88,6 +117,27 @@ final class ARViewController: UIViewController {
         trackingStatusLabel.layoutMargins = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
     }
 
+    private func setupHintLabel() {
+        view.addSubview(hintLabel)
+        NSLayoutConstraint.activate([
+            hintLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
+            hintLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            hintLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.85),
+            hintLabel.heightAnchor.constraint(equalToConstant: 44)
+        ])
+    }
+
+    func showHint() {
+        guard !hasCircledOnce else { return }
+        UIView.animate(withDuration: 0.4) { self.hintLabel.alpha = 1 }
+    }
+
+    private func hideHintPermanently() {
+        guard !hasCircledOnce else { return }
+        hasCircledOnce = true
+        UIView.animate(withDuration: 0.3) { self.hintLabel.alpha = 0 }
+    }
+
     private func setupGesture() {
         let gesture = CircleGestureRecognizer(target: self,
                                               action: #selector(handleGestureStateChange(_:)))
@@ -97,12 +147,14 @@ final class ARViewController: UIViewController {
     private func setupCoachingOverlay() {
         let coaching = ARCoachingOverlayView()
         coaching.session = arView.session
+        coaching.delegate = self
         coaching.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         coaching.frame = view.bounds
         coaching.goal = .anyPlane
         // Suppress during UI automation tests
         if CommandLine.arguments.contains("--uitesting") {
             coaching.isHidden = true
+            showHint()
         }
         view.addSubview(coaching)
     }
@@ -117,6 +169,7 @@ final class ARViewController: UIViewController {
         case .ended:
             overlayView.path = nil
             impactFeedback.impactOccurred()   // short tap confirms gesture accepted
+            hideHintPermanently()
             processCircle(from: recognizer)
 
         case .failed, .cancelled:
@@ -157,6 +210,37 @@ final class ARViewController: UIViewController {
             UIAccessibility.post(notification: .announcement, argument: text)
         }
     }
+
+    // MARK: - Debug (DEBUG builds only)
+
+    #if DEBUG
+    private func setupDebugGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleDebugTripleTap(_:)))
+        tap.numberOfTapsRequired = 3
+        tap.numberOfTouchesRequired = 2   // two-finger triple-tap
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc private func handleDebugTripleTap(_ sender: UITapGestureRecognizer) {
+        guard let manager = debugManager else { return }
+        let state = manager.cycleState()
+        let banner = UILabel()
+        banner.text = "  \(state.label)  "
+        banner.textColor = .white
+        banner.backgroundColor = UIColor.systemPurple.withAlphaComponent(0.85)
+        banner.font = .monospacedSystemFont(ofSize: 13, weight: .semibold)
+        banner.layer.cornerRadius = 8
+        banner.clipsToBounds = true
+        banner.sizeToFit()
+        banner.center = CGPoint(x: view.bounds.midX, y: view.safeAreaInsets.top + 60)
+        view.addSubview(banner)
+        UIView.animate(withDuration: 0.3, delay: 1.5, options: .curveEaseOut) {
+            banner.alpha = 0
+        } completion: { _ in
+            banner.removeFromSuperview()
+        }
+    }
+    #endif
 
     // MARK: - Camera Permission
 
@@ -247,5 +331,20 @@ extension ARViewController: ARSessionDelegate {
         case .insufficientFeatures:  return "Point at a textured surface"
         @unknown default:            return "Limited tracking"
         }
+    }
+}
+
+// MARK: - ARCoachingOverlayViewDelegate
+
+extension ARViewController: ARCoachingOverlayViewDelegate {
+
+    func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
+        // Coaching finished — reveal the hint label so users know what to do next.
+        showHint()
+    }
+
+    func coachingOverlayViewWillActivate(_ coachingOverlayView: ARCoachingOverlayView) {
+        // Hide hint while coaching is active to avoid UI clutter.
+        UIView.animate(withDuration: 0.3) { self.hintLabel.alpha = 0 }
     }
 }

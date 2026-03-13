@@ -27,6 +27,7 @@
 		E747DE8891489BEECAA48750 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B81664C0775C148B8DC85F /* SceneDelegate.swift */; };
 		EA203C3DAE67ED572CFA47B3 /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85EEAA259F1E04B2E20E850F /* Vision.framework */; };
 		F0DCB51CBEDC59AF758F31B4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D0DF757F253E41D1E0DD28 /* AVFoundation.framework */; };
+		F12F7DABD954D000ECDFE694 /* DebugOverlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30789B9AD0A44172AB88A5AE /* DebugOverlayManager.swift */; };
 		F7635182B8896A8F91BC5A7A /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8EA296555D75FD72CD7AE8 /* ARViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		0DA32126F8FB2DCE92970C49 /* ARSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionManager.swift; sourceTree = "<group>"; };
 		1BED788F4EEB5B1157A026F9 /* DepthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthService.swift; sourceTree = "<group>"; };
 		2CEF6393E1E2C85F0DF48B68 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
+		30789B9AD0A44172AB88A5AE /* DebugOverlayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugOverlayManager.swift; sourceTree = "<group>"; };
 		3520EBC3EB0C9DA3E56DB651 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3B8EA296555D75FD72CD7AE8 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		40D0DF757F253E41D1E0DD28 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				0DA32126F8FB2DCE92970C49 /* ARSessionManager.swift */,
+				30789B9AD0A44172AB88A5AE /* DebugOverlayManager.swift */,
 				E69F7EFFA027CA3FA6F92097 /* LabelAnchorManager.swift */,
 				8966654349D2C43169CE78E7 /* ModelService.swift */,
 			);
@@ -352,6 +355,7 @@
 				4BAD12C65DD3A5E1918E52D0 /* CircleGestureRecognizer.swift in Sources */,
 				CDEE162AAEF50858086A16C4 /* CircleOverlayView.swift in Sources */,
 				C3B417E8FE712C85DEB48A02 /* ClassificationService.swift in Sources */,
+				F12F7DABD954D000ECDFE694 /* DebugOverlayManager.swift in Sources */,
 				22921B0E2F88A98BD33CD612 /* DepthService.swift in Sources */,
 				907A8BF792541B825CDE1034 /* LabelAnchorManager.swift in Sources */,
 				23002277D7BC864D4DAE277B /* ModelService.swift in Sources */,

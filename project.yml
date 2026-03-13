@@ -7,6 +7,25 @@ options:
   createIntermediateGroups: true
   generateEmptyDirectories: true
 
+schemes:
+  CircleDetectAR:
+    build:
+      targets:
+        CircleDetectAR: all
+        CircleDetectARTests: [test]
+        CircleDetectARUITests: [test]
+    test:
+      targets:
+        - CircleDetectARTests
+        - CircleDetectARUITests
+      testPlans:
+        - path: CircleDetectAR.xctestplan
+          defaultPlan: true
+    run:
+      config: Debug
+    archive:
+      config: Release
+
 settings:
   base:
     SWIFT_VERSION: "5.9"
