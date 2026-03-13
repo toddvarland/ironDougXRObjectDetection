@@ -35,6 +35,13 @@
         <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
 
+    <!-- Allow HTTP to local network servers (YOLO11 inference) -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsLocalNetworking</key>
+        <true/>
+    </dict>
+
     <!-- Launch screen (generated) -->
     <key>UILaunchScreen</key>
     <dict/>

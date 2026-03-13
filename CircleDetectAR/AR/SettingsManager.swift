@@ -19,6 +19,8 @@ final class SettingsManager {
         case confidenceThreshold   = "com.ironDoug.CircleDetectAR.confidenceThreshold"
         case hapticsEnabled        = "com.ironDoug.CircleDetectAR.hapticsEnabled"
         case maxHistoryItems       = "com.ironDoug.CircleDetectAR.maxHistoryItems"
+        case useRemoteInference    = "com.ironDoug.CircleDetectAR.useRemoteInference"
+        case remoteServerURL       = "com.ironDoug.CircleDetectAR.remoteServerURL"
     }
 
     // MARK: - Settings
@@ -55,5 +57,22 @@ final class SettingsManager {
             return stored == 0 ? 20 : stored
         }
         set { defaults.set(newValue, forKey: Key.maxHistoryItems.rawValue) }
+    }
+
+    /// Route classifications to the remote YOLO11 server instead of on-device CoreML. Default: false.
+    var useRemoteInference: Bool {
+        get { defaults.object(forKey: Key.useRemoteInference.rawValue) == nil
+                ? false
+                : defaults.bool(forKey: Key.useRemoteInference.rawValue) }
+        set { defaults.set(newValue, forKey: Key.useRemoteInference.rawValue) }
+    }
+
+    /// Base URL of the YOLO11 inference server. Default: http://192.168.194.196:8000
+    var remoteServerURL: String {
+        get {
+            let stored = defaults.string(forKey: Key.remoteServerURL.rawValue) ?? ""
+            return stored.isEmpty ? "http://192.168.194.196:8000" : stored
+        }
+        set { defaults.set(newValue, forKey: Key.remoteServerURL.rawValue) }
     }
 }

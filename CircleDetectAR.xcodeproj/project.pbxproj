@@ -11,6 +11,7 @@
 		0E6BCAF4E88839EDBDC2744F /* ARSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA32126F8FB2DCE92970C49 /* ARSessionManager.swift */; };
 		11459DEA65733945886A993A /* SettingsManagerTests.swift.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0BE337E351D6FB2EF3DCCC9E /* SettingsManagerTests.swift.plist */; };
 		1EBC4339660FA7A4A5376A45 /* CircleDetectARUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938E819E15AE561C9A8941FC /* CircleDetectARUITests.swift */; };
+		2288CEDEC337D536CC293478 /* RemoteDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CF4A1211CCAFC07C0C273B /* RemoteDetection.swift */; };
 		22921B0E2F88A98BD33CD612 /* DepthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BED788F4EEB5B1157A026F9 /* DepthService.swift */; };
 		23002277D7BC864D4DAE277B /* ModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966654349D2C43169CE78E7 /* ModelService.swift */; };
 		2D382893BD4E389EDF447D75 /* SettingsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42C3BE439B6A392D3BD1301 /* SettingsManagerTests.swift */; };
@@ -18,11 +19,13 @@
 		454E4B2CBE4361AF8B7A669D /* RealityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F90A99507BCD65F19D72820 /* RealityKit.framework */; };
 		49BB1CF3BCEB9B1F3BC2F238 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DD80889B5C65096B42DC89D /* Assets.xcassets */; };
 		4BAD12C65DD3A5E1918E52D0 /* CircleGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92CFCBD86446588B58B699 /* CircleGestureRecognizer.swift */; };
+		4F7B8CC5B90C49651FEACFCF /* RemoteDetectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCF1DD730ADD8806B9A3E5C /* RemoteDetectionTests.swift */; };
 		58033196BE7830A02A32A53E /* CircleGestureRecognizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF66822377D9DE6607AE5E11 /* CircleGestureRecognizerTests.swift */; };
 		67315184D6B735CD61220C4E /* ClassificationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFD0E11A310ECE750BA187 /* ClassificationServiceTests.swift */; };
 		8143826F47FDE12AA9373476 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40FA15341D65E84EE9D9E8E /* AppDelegate.swift */; };
 		907A8BF792541B825CDE1034 /* LabelAnchorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69F7EFFA027CA3FA6F92097 /* LabelAnchorManager.swift */; };
 		927FA9C84A60A9F0AF6D61E3 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEF6393E1E2C85F0DF48B68 /* ARKit.framework */; };
+		AEB27EEBCF44A28869FF7620 /* RemoteInferenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55FD1C3AD9B48684CADF4A5 /* RemoteInferenceService.swift */; };
 		B0D892B7D9CEF2E07C42C995 /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01311CD772A71EEA33E74816 /* CoreML.framework */; };
 		B5431E914298A6B008D3CFA6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAFB0CFD7483FE54C6C958 /* SettingsManager.swift */; };
 		BF769668F8C714CDABC7BCA3 /* ResultHistoryManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71FB54A7CA929883CD65AEE /* ResultHistoryManagerTests.swift */; };
@@ -78,7 +81,7 @@
 		85EEAA259F1E04B2E20E850F /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
 		8966654349D2C43169CE78E7 /* ModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelService.swift; sourceTree = "<group>"; };
 		938E819E15AE561C9A8941FC /* CircleDetectARUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleDetectARUITests.swift; sourceTree = "<group>"; };
-		96264EBB91A509A871B19F6B /* CircleDetectAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CircleDetectAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		96264EBB91A509A871B19F6B /* CircleDetectAR.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CircleDetectAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA837D9BB35093350A080DF6 /* ResultHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultHistoryManager.swift; sourceTree = "<group>"; };
 		B71FB54A7CA929883CD65AEE /* ResultHistoryManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultHistoryManagerTests.swift; sourceTree = "<group>"; };
 		BB92CFCBD86446588B58B699 /* CircleGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -86,11 +89,14 @@
 		C2DEE2F6C07AB9D57189D006 /* CircleOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleOverlayView.swift; sourceTree = "<group>"; };
 		C40FA15341D65E84EE9D9E8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C42C3BE439B6A392D3BD1301 /* SettingsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManagerTests.swift; sourceTree = "<group>"; };
+		D55FD1C3AD9B48684CADF4A5 /* RemoteInferenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteInferenceService.swift; sourceTree = "<group>"; };
 		DF66822377D9DE6607AE5E11 /* CircleGestureRecognizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGestureRecognizerTests.swift; sourceTree = "<group>"; };
 		E69F7EFFA027CA3FA6F92097 /* LabelAnchorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAnchorManager.swift; sourceTree = "<group>"; };
 		ECBB8276170589F2C5D8ACE9 /* CircleDetectARUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = CircleDetectARUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE287615A2AD6F4460800CD2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F9CF4A1211CCAFC07C0C273B /* RemoteDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDetection.swift; sourceTree = "<group>"; };
 		FB6E40097FE34E369E6AB19F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FDCF1DD730ADD8806B9A3E5C /* RemoteDetectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDetectionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +180,7 @@
 				DF66822377D9DE6607AE5E11 /* CircleGestureRecognizerTests.swift */,
 				6BEFD0E11A310ECE750BA187 /* ClassificationServiceTests.swift */,
 				814EFADAAFE6A306961D74D3 /* DepthServiceTests.swift */,
+				FDCF1DD730ADD8806B9A3E5C /* RemoteDetectionTests.swift */,
 				B71FB54A7CA929883CD65AEE /* ResultHistoryManagerTests.swift */,
 				C42C3BE439B6A392D3BD1301 /* SettingsManagerTests.swift */,
 				0BE337E351D6FB2EF3DCCC9E /* SettingsManagerTests.swift.plist */,
@@ -221,6 +228,8 @@
 			children = (
 				085A0E85578B17AD21380BEA /* ClassificationService.swift */,
 				1BED788F4EEB5B1157A026F9 /* DepthService.swift */,
+				F9CF4A1211CCAFC07C0C273B /* RemoteDetection.swift */,
+				D55FD1C3AD9B48684CADF4A5 /* RemoteInferenceService.swift */,
 				AA837D9BB35093350A080DF6 /* ResultHistoryManager.swift */,
 			);
 			path = Detection;
@@ -375,6 +384,7 @@
 				58033196BE7830A02A32A53E /* CircleGestureRecognizerTests.swift in Sources */,
 				67315184D6B735CD61220C4E /* ClassificationServiceTests.swift in Sources */,
 				CF07AAEE7358E8A85C6CD01E /* DepthServiceTests.swift in Sources */,
+				4F7B8CC5B90C49651FEACFCF /* RemoteDetectionTests.swift in Sources */,
 				BF769668F8C714CDABC7BCA3 /* ResultHistoryManagerTests.swift in Sources */,
 				2D382893BD4E389EDF447D75 /* SettingsManagerTests.swift in Sources */,
 			);
@@ -395,6 +405,8 @@
 				907A8BF792541B825CDE1034 /* LabelAnchorManager.swift in Sources */,
 				E926C09E8F0723EE9B5396D2 /* MobileNetV2.mlmodel in Sources */,
 				23002277D7BC864D4DAE277B /* ModelService.swift in Sources */,
+				2288CEDEC337D536CC293478 /* RemoteDetection.swift in Sources */,
+				AEB27EEBCF44A28869FF7620 /* RemoteInferenceService.swift in Sources */,
 				F8566DEFCC4B0DC5185DAB26 /* ResultHistoryManager.swift in Sources */,
 				0694BB5D7CF7867D3BC098E7 /* ResultHistoryViewController.swift in Sources */,
 				E747DE8891489BEECAA48750 /* SceneDelegate.swift in Sources */,
@@ -426,7 +438,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5Q2YW9392K;
 				INFOPLIST_FILE = CircleDetectAR/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -483,7 +494,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5Q2YW9392K;
 				INFOPLIST_FILE = CircleDetectAR/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (

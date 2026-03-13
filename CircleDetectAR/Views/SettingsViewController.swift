@@ -27,7 +27,7 @@ final class SettingsViewController: UIViewController {
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .pageSheet
         if let sheet = nav.sheetPresentationController {
-            sheet.detents = [.medium()]
+            sheet.detents = [.medium(), .large()]
             sheet.prefersGrabberVisible = true
             sheet.preferredCornerRadius = 20
         }
@@ -60,17 +60,25 @@ final class SettingsViewController: UIViewController {
 extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
     private enum Section: Int, CaseIterable {
-        case display, behaviour
+        case display, behaviour, inference
         var title: String {
             switch self {
             case .display:   return "Display"
             case .behaviour: return "Behaviour"
+            case .inference: return "Inference"
+            }
+        }
+        var footer: String? {
+            switch self {
+            case .inference: return "When enabled, frames are sent to the YOLO11 server on your local network instead of using the on-device CoreML model."
+            default: return nil
             }
         }
     }
 
     private enum DisplayRow: Int, CaseIterable { case showDepth }
     private enum BehaviourRow: Int, CaseIterable { case haptics, confidenceThreshold }
+    private enum InferenceRow: Int, CaseIterable { case useRemote, serverURL }
 
     func numberOfSections(in tableView: UITableView) -> Int { Section.allCases.count }
 
@@ -78,11 +86,16 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         switch Section(rawValue: section)! {
         case .display:    return DisplayRow.allCases.count
         case .behaviour:  return BehaviourRow.allCases.count
+        case .inference:  return InferenceRow.allCases.count
         }
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         Section(rawValue: section)?.title
+    }
+
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        Section(rawValue: section)?.footer
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,15 +128,34 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.accessoryType = .disclosureIndicator
                 cell.selectionStyle = .default
             }
+        case .inference:
+            switch InferenceRow(rawValue: indexPath.row)! {
+            case .useRemote:
+                cell.textLabel?.text = "Use Remote (YOLO11)"
+                let toggle = UISwitch()
+                toggle.isOn = settings.useRemoteInference
+                toggle.addTarget(self, action: #selector(toggleRemoteInference(_:)), for: .valueChanged)
+                cell.accessoryView = toggle
+            case .serverURL:
+                cell.textLabel?.text = "Server URL"
+                cell.detailTextLabel?.text = settings.remoteServerURL
+                cell.accessoryType = .disclosureIndicator
+                cell.selectionStyle = .default
+            }
         }
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard Section(rawValue: indexPath.section) == .behaviour,
-              BehaviourRow(rawValue: indexPath.row) == .confidenceThreshold else { return }
-        presentConfidenceThresholdPicker()
+        switch Section(rawValue: indexPath.section)! {
+        case .behaviour where BehaviourRow(rawValue: indexPath.row) == .confidenceThreshold:
+            presentConfidenceThresholdPicker()
+        case .inference where InferenceRow(rawValue: indexPath.row) == .serverURL:
+            presentServerURLEditor()
+        default:
+            break
+        }
     }
 
     // MARK: - Actions
@@ -134,6 +166,31 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
     @objc private func toggleHaptics(_ sender: UISwitch) {
         SettingsManager.shared.hapticsEnabled = sender.isOn
+    }
+
+    @objc private func toggleRemoteInference(_ sender: UISwitch) {
+        SettingsManager.shared.useRemoteInference = sender.isOn
+    }
+
+    private func presentServerURLEditor() {
+        let alert = UIAlertController(title: "Server URL",
+                                      message: "Enter the base URL of the YOLO11 server (no trailing slash).",
+                                      preferredStyle: .alert)
+        alert.addTextField { tf in
+            tf.text = SettingsManager.shared.remoteServerURL
+            tf.keyboardType = .URL
+            tf.autocapitalizationType = .none
+            tf.autocorrectionType = .no
+            tf.clearButtonMode = .whileEditing
+        }
+        alert.addAction(UIAlertAction(title: "Save", style: .default) { [weak self, weak alert] _ in
+            if let text = alert?.textFields?.first?.text, !text.isEmpty {
+                SettingsManager.shared.remoteServerURL = text
+                self?.tableView.reloadData()
+            }
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
     }
 
     private func presentConfidenceThresholdPicker() {

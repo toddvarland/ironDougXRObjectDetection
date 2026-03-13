@@ -240,36 +240,44 @@ final class ARViewController: UIViewController {
                                                   at: lastCircleCenter,
                                                   viewSize: arView.bounds.size)
 
-        // Convert screen rect → normalised Vision ROI
-        let viewSize = arView.bounds.size
-        let normalizedROI = VNNormalizedRectForImageRect(rect,
-                                                         Int(viewSize.width),
-                                                         Int(viewSize.height))
-
-        classificationService.classify(
-            pixelBuffer: currentFrame.capturedImage,
-            regionOfInterest: normalizedROI
-        ) { [weak self] label, confidence in
-            guard let self else { return }
-
-            // Respect confidence threshold
-            guard confidence >= SettingsManager.shared.confidenceThreshold else { return }
-
-            let depth = self.lastCircleDepth
-            let item  = ResultItem(label: label,
-                                   confidence: confidence,
-                                   depth: SettingsManager.shared.showDepth ? depth : nil,
-                                   timestamp: Date())
-            ResultHistoryManager.shared.add(item)
-
-            self.anchorManager.placeLabel(item.displayText,
-                                          at: self.lastCircleCenter,
-                                          in: self.arView)
-            if SettingsManager.shared.hapticsEnabled {
-                self.notificationFeedback.notificationOccurred(.success)
+        if SettingsManager.shared.useRemoteInference {
+            // ── Remote YOLO11 path ──────────────────────────────────────────
+            RemoteInferenceService.shared.detect(in: arView, circleRect: rect) { [weak self] label, confidence in
+                guard let self else { return }
+                self.handleInferenceResult(label: label, confidence: confidence)
             }
-            UIAccessibility.post(notification: .announcement, argument: item.displayText)
+        } else {
+            // ── On-device CoreML / Vision path ──────────────────────────────
+            let viewSize = arView.bounds.size
+            let normalizedROI = VNNormalizedRectForImageRect(rect,
+                                                             Int(viewSize.width),
+                                                             Int(viewSize.height))
+            classificationService.classify(
+                pixelBuffer: currentFrame.capturedImage,
+                regionOfInterest: normalizedROI
+            ) { [weak self] label, confidence in
+                guard let self else { return }
+                self.handleInferenceResult(label: label, confidence: confidence)
+            }
         }
+    }
+
+    /// Common result handler shared by both inference paths (called on main thread).
+    private func handleInferenceResult(label: String, confidence: Float) {
+        // Respect confidence threshold
+        guard confidence >= SettingsManager.shared.confidenceThreshold else { return }
+
+        let depth = self.lastCircleDepth
+        let item  = ResultItem(label: label,
+                               confidence: confidence,
+                               depth: SettingsManager.shared.showDepth ? depth : nil,
+                               timestamp: Date())
+        ResultHistoryManager.shared.add(item)
+        anchorManager.placeLabel(item.displayText, at: lastCircleCenter, in: arView)
+        if SettingsManager.shared.hapticsEnabled {
+            notificationFeedback.notificationOccurred(.success)
+        }
+        UIAccessibility.post(notification: .announcement, argument: item.displayText)
     }
 
     // MARK: - Debug (DEBUG builds only)
