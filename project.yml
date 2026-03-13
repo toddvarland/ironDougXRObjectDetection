@@ -1,0 +1,68 @@
+name: CircleDetectAR
+
+options:
+  bundleIdPrefix: com.ironDoug
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
+
+targets:
+  CircleDetectAR:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: CircleDetectAR
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ironDoug.CircleDetectAR
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_FILE: CircleDetectAR/App/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+    dependencies:
+      - sdk: ARKit.framework
+      - sdk: RealityKit.framework
+      - sdk: Vision.framework
+      - sdk: CoreML.framework
+      - sdk: AVFoundation.framework
+
+  CircleDetectARTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: CircleDetectARTests
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ironDoug.CircleDetectARTests
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: CircleDetectAR
+
+  CircleDetectARUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: CircleDetectARUITests
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ironDoug.CircleDetectARUITests
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: CircleDetectAR

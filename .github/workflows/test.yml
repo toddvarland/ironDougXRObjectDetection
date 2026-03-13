@@ -1,0 +1,63 @@
+name: CircleDetectAR CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  unit-tests:
+    name: Unit Tests
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Install xcodegen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Run unit tests
+        run: |
+          xcodebuild test \
+            -project CircleDetectAR.xcodeproj \
+            -scheme CircleDetectAR \
+            -testPlan unit-tests \
+            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -resultBundlePath TestResults.xcresult \
+            | xcpretty --color --report junit --output test-results.xml
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-results
+          path: |
+            TestResults.xcresult
+            test-results.xml
+
+  # UI tests require a physical device — run manually or via cloud device farm.
+  # Uncomment and configure the block below for AWS Device Farm / BrowserStack.
+  #
+  # ui-tests:
+  #   name: UI Tests (Device Farm)
+  #   runs-on: macos-14
+  #   needs: unit-tests
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Build for testing
+  #       run: |
+  #         xcodebuild build-for-testing \
+  #           -project CircleDetectAR.xcodeproj \
+  #           -scheme CircleDetectAR \
+  #           -destination 'generic/platform=iOS' \
+  #           -derivedDataPath DerivedData
+  #     - name: Upload to device farm
+  #       run: echo "Configure your device farm upload step here"

@@ -1,0 +1,651 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E6BCAF4E88839EDBDC2744F /* ARSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA32126F8FB2DCE92970C49 /* ARSessionManager.swift */; };
+		1EBC4339660FA7A4A5376A45 /* CircleDetectARUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938E819E15AE561C9A8941FC /* CircleDetectARUITests.swift */; };
+		22921B0E2F88A98BD33CD612 /* DepthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BED788F4EEB5B1157A026F9 /* DepthService.swift */; };
+		23002277D7BC864D4DAE277B /* ModelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966654349D2C43169CE78E7 /* ModelService.swift */; };
+		454E4B2CBE4361AF8B7A669D /* RealityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F90A99507BCD65F19D72820 /* RealityKit.framework */; };
+		49BB1CF3BCEB9B1F3BC2F238 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DD80889B5C65096B42DC89D /* Assets.xcassets */; };
+		4BAD12C65DD3A5E1918E52D0 /* CircleGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB92CFCBD86446588B58B699 /* CircleGestureRecognizer.swift */; };
+		58033196BE7830A02A32A53E /* CircleGestureRecognizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF66822377D9DE6607AE5E11 /* CircleGestureRecognizerTests.swift */; };
+		67315184D6B735CD61220C4E /* ClassificationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEFD0E11A310ECE750BA187 /* ClassificationServiceTests.swift */; };
+		8143826F47FDE12AA9373476 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40FA15341D65E84EE9D9E8E /* AppDelegate.swift */; };
+		907A8BF792541B825CDE1034 /* LabelAnchorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69F7EFFA027CA3FA6F92097 /* LabelAnchorManager.swift */; };
+		927FA9C84A60A9F0AF6D61E3 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEF6393E1E2C85F0DF48B68 /* ARKit.framework */; };
+		B0D892B7D9CEF2E07C42C995 /* CoreML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01311CD772A71EEA33E74816 /* CoreML.framework */; };
+		C3B417E8FE712C85DEB48A02 /* ClassificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A0E85578B17AD21380BEA /* ClassificationService.swift */; };
+		CDEE162AAEF50858086A16C4 /* CircleOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DEE2F6C07AB9D57189D006 /* CircleOverlayView.swift */; };
+		CF07AAEE7358E8A85C6CD01E /* DepthServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814EFADAAFE6A306961D74D3 /* DepthServiceTests.swift */; };
+		E1AA8C6C9290573E921086FA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FB6E40097FE34E369E6AB19F /* README.md */; };
+		E747DE8891489BEECAA48750 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B81664C0775C148B8DC85F /* SceneDelegate.swift */; };
+		EA203C3DAE67ED572CFA47B3 /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85EEAA259F1E04B2E20E850F /* Vision.framework */; };
+		F0DCB51CBEDC59AF758F31B4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40D0DF757F253E41D1E0DD28 /* AVFoundation.framework */; };
+		F7635182B8896A8F91BC5A7A /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8EA296555D75FD72CD7AE8 /* ARViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8E0642B2755A537D620C3098 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3097B85B956B3CA89ADC9B23 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 553E6170ECCB12D3F8394EDB;
+			remoteInfo = CircleDetectAR;
+		};
+		E7B194EB702C66440519CE88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3097B85B956B3CA89ADC9B23 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 553E6170ECCB12D3F8394EDB;
+			remoteInfo = CircleDetectAR;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01311CD772A71EEA33E74816 /* CoreML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreML.framework; path = System/Library/Frameworks/CoreML.framework; sourceTree = SDKROOT; };
+		085A0E85578B17AD21380BEA /* ClassificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationService.swift; sourceTree = "<group>"; };
+		0DA32126F8FB2DCE92970C49 /* ARSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSessionManager.swift; sourceTree = "<group>"; };
+		1BED788F4EEB5B1157A026F9 /* DepthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthService.swift; sourceTree = "<group>"; };
+		2CEF6393E1E2C85F0DF48B68 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
+		3520EBC3EB0C9DA3E56DB651 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3B8EA296555D75FD72CD7AE8 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
+		40D0DF757F253E41D1E0DD28 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4DD80889B5C65096B42DC89D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5F90A99507BCD65F19D72820 /* RealityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealityKit.framework; path = System/Library/Frameworks/RealityKit.framework; sourceTree = SDKROOT; };
+		68F80C6B7E8984ED101517F7 /* CircleDetectARTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = CircleDetectARTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BEFD0E11A310ECE750BA187 /* ClassificationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationServiceTests.swift; sourceTree = "<group>"; };
+		73B81664C0775C148B8DC85F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		814EFADAAFE6A306961D74D3 /* DepthServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthServiceTests.swift; sourceTree = "<group>"; };
+		85EEAA259F1E04B2E20E850F /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
+		8966654349D2C43169CE78E7 /* ModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelService.swift; sourceTree = "<group>"; };
+		938E819E15AE561C9A8941FC /* CircleDetectARUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleDetectARUITests.swift; sourceTree = "<group>"; };
+		96264EBB91A509A871B19F6B /* CircleDetectAR.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CircleDetectAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB92CFCBD86446588B58B699 /* CircleGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGestureRecognizer.swift; sourceTree = "<group>"; };
+		C2DEE2F6C07AB9D57189D006 /* CircleOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleOverlayView.swift; sourceTree = "<group>"; };
+		C40FA15341D65E84EE9D9E8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DF66822377D9DE6607AE5E11 /* CircleGestureRecognizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGestureRecognizerTests.swift; sourceTree = "<group>"; };
+		E69F7EFFA027CA3FA6F92097 /* LabelAnchorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAnchorManager.swift; sourceTree = "<group>"; };
+		ECBB8276170589F2C5D8ACE9 /* CircleDetectARUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = CircleDetectARUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB6E40097FE34E369E6AB19F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9BFCB7935FDE83AC6996C34B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				927FA9C84A60A9F0AF6D61E3 /* ARKit.framework in Frameworks */,
+				454E4B2CBE4361AF8B7A669D /* RealityKit.framework in Frameworks */,
+				EA203C3DAE67ED572CFA47B3 /* Vision.framework in Frameworks */,
+				B0D892B7D9CEF2E07C42C995 /* CoreML.framework in Frameworks */,
+				F0DCB51CBEDC59AF758F31B4 /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05445EE43A3E31784DD7B0AC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				96264EBB91A509A871B19F6B /* CircleDetectAR.app */,
+				68F80C6B7E8984ED101517F7 /* CircleDetectARTests.xctest */,
+				ECBB8276170589F2C5D8ACE9 /* CircleDetectARUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0DC5DD6879A34305EA0DB7BC /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C40FA15341D65E84EE9D9E8E /* AppDelegate.swift */,
+				3520EBC3EB0C9DA3E56DB651 /* Info.plist */,
+				73B81664C0775C148B8DC85F /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		0DCA78FEA8981B76B84AE478 /* CircleDetectARUITests */ = {
+			isa = PBXGroup;
+			children = (
+				938E819E15AE561C9A8941FC /* CircleDetectARUITests.swift */,
+			);
+			path = CircleDetectARUITests;
+			sourceTree = "<group>";
+		};
+		1D844DE8F4C6525402EE9CA6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FB6E40097FE34E369E6AB19F /* README.md */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		30D8D80CB3E8B036735B0BAF /* CircleDetectAR */ = {
+			isa = PBXGroup;
+			children = (
+				0DC5DD6879A34305EA0DB7BC /* App */,
+				5773234C7F35B982B563100F /* AR */,
+				7CC891B527E260FFD4307824 /* Detection */,
+				3E76EC2E20A1E61290D07384 /* Gestures */,
+				1D844DE8F4C6525402EE9CA6 /* Models */,
+				D50261BFF833824ED3789596 /* Resources */,
+				5CB50344A2E1F73ED5FA85A7 /* Views */,
+			);
+			path = CircleDetectAR;
+			sourceTree = "<group>";
+		};
+		3E76EC2E20A1E61290D07384 /* Gestures */ = {
+			isa = PBXGroup;
+			children = (
+				BB92CFCBD86446588B58B699 /* CircleGestureRecognizer.swift */,
+			);
+			path = Gestures;
+			sourceTree = "<group>";
+		};
+		3FC69AFBDF8040B990ADB3E4 /* CircleDetectARTests */ = {
+			isa = PBXGroup;
+			children = (
+				DF66822377D9DE6607AE5E11 /* CircleGestureRecognizerTests.swift */,
+				6BEFD0E11A310ECE750BA187 /* ClassificationServiceTests.swift */,
+				814EFADAAFE6A306961D74D3 /* DepthServiceTests.swift */,
+			);
+			path = CircleDetectARTests;
+			sourceTree = "<group>";
+		};
+		5773234C7F35B982B563100F /* AR */ = {
+			isa = PBXGroup;
+			children = (
+				0DA32126F8FB2DCE92970C49 /* ARSessionManager.swift */,
+				E69F7EFFA027CA3FA6F92097 /* LabelAnchorManager.swift */,
+				8966654349D2C43169CE78E7 /* ModelService.swift */,
+			);
+			path = AR;
+			sourceTree = "<group>";
+		};
+		5CB50344A2E1F73ED5FA85A7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3B8EA296555D75FD72CD7AE8 /* ARViewController.swift */,
+				C2DEE2F6C07AB9D57189D006 /* CircleOverlayView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		73F33E4683E38D1D0354ACE1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2CEF6393E1E2C85F0DF48B68 /* ARKit.framework */,
+				40D0DF757F253E41D1E0DD28 /* AVFoundation.framework */,
+				01311CD772A71EEA33E74816 /* CoreML.framework */,
+				5F90A99507BCD65F19D72820 /* RealityKit.framework */,
+				85EEAA259F1E04B2E20E850F /* Vision.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7CC891B527E260FFD4307824 /* Detection */ = {
+			isa = PBXGroup;
+			children = (
+				085A0E85578B17AD21380BEA /* ClassificationService.swift */,
+				1BED788F4EEB5B1157A026F9 /* DepthService.swift */,
+			);
+			path = Detection;
+			sourceTree = "<group>";
+		};
+		9B5B18F2993B4D8E7D04017B = {
+			isa = PBXGroup;
+			children = (
+				30D8D80CB3E8B036735B0BAF /* CircleDetectAR */,
+				3FC69AFBDF8040B990ADB3E4 /* CircleDetectARTests */,
+				0DCA78FEA8981B76B84AE478 /* CircleDetectARUITests */,
+				73F33E4683E38D1D0354ACE1 /* Frameworks */,
+				05445EE43A3E31784DD7B0AC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D50261BFF833824ED3789596 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4DD80889B5C65096B42DC89D /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		553E6170ECCB12D3F8394EDB /* CircleDetectAR */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD4BD72A5EAF1CAB6A991F2A /* Build configuration list for PBXNativeTarget "CircleDetectAR" */;
+			buildPhases = (
+				D533885A04B922E1C4CCD381 /* Sources */,
+				63B57621F9E68102751549F1 /* Resources */,
+				9BFCB7935FDE83AC6996C34B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CircleDetectAR;
+			packageProductDependencies = (
+			);
+			productName = CircleDetectAR;
+			productReference = 96264EBB91A509A871B19F6B /* CircleDetectAR.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9A936BC81ACFF7FEAD11F175 /* CircleDetectARTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C6B8AF358030341384D5338 /* Build configuration list for PBXNativeTarget "CircleDetectARTests" */;
+			buildPhases = (
+				C88A226DC1CAFDF7527A0306 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				54B290444D4A3610923C9C39 /* PBXTargetDependency */,
+			);
+			name = CircleDetectARTests;
+			packageProductDependencies = (
+			);
+			productName = CircleDetectARTests;
+			productReference = 68F80C6B7E8984ED101517F7 /* CircleDetectARTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BBDC26B15382D17190EE41D5 /* CircleDetectARUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA7D1FA4DF467F9117E4601D /* Build configuration list for PBXNativeTarget "CircleDetectARUITests" */;
+			buildPhases = (
+				3DA4F429342B56B6D6609B63 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A12DA12565A256EA8A66E841 /* PBXTargetDependency */,
+			);
+			name = CircleDetectARUITests;
+			packageProductDependencies = (
+			);
+			productName = CircleDetectARUITests;
+			productReference = ECBB8276170589F2C5D8ACE9 /* CircleDetectARUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3097B85B956B3CA89ADC9B23 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					BBDC26B15382D17190EE41D5 = {
+						TestTargetID = 553E6170ECCB12D3F8394EDB;
+					};
+				};
+			};
+			buildConfigurationList = 2A6C9897B2CD822E91BF6FB6 /* Build configuration list for PBXProject "CircleDetectAR" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 9B5B18F2993B4D8E7D04017B;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 05445EE43A3E31784DD7B0AC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				553E6170ECCB12D3F8394EDB /* CircleDetectAR */,
+				9A936BC81ACFF7FEAD11F175 /* CircleDetectARTests */,
+				BBDC26B15382D17190EE41D5 /* CircleDetectARUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		63B57621F9E68102751549F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49BB1CF3BCEB9B1F3BC2F238 /* Assets.xcassets in Resources */,
+				E1AA8C6C9290573E921086FA /* README.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3DA4F429342B56B6D6609B63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EBC4339660FA7A4A5376A45 /* CircleDetectARUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C88A226DC1CAFDF7527A0306 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58033196BE7830A02A32A53E /* CircleGestureRecognizerTests.swift in Sources */,
+				67315184D6B735CD61220C4E /* ClassificationServiceTests.swift in Sources */,
+				CF07AAEE7358E8A85C6CD01E /* DepthServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D533885A04B922E1C4CCD381 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E6BCAF4E88839EDBDC2744F /* ARSessionManager.swift in Sources */,
+				F7635182B8896A8F91BC5A7A /* ARViewController.swift in Sources */,
+				8143826F47FDE12AA9373476 /* AppDelegate.swift in Sources */,
+				4BAD12C65DD3A5E1918E52D0 /* CircleGestureRecognizer.swift in Sources */,
+				CDEE162AAEF50858086A16C4 /* CircleOverlayView.swift in Sources */,
+				C3B417E8FE712C85DEB48A02 /* ClassificationService.swift in Sources */,
+				22921B0E2F88A98BD33CD612 /* DepthService.swift in Sources */,
+				907A8BF792541B825CDE1034 /* LabelAnchorManager.swift in Sources */,
+				23002277D7BC864D4DAE277B /* ModelService.swift in Sources */,
+				E747DE8891489BEECAA48750 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		54B290444D4A3610923C9C39 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 553E6170ECCB12D3F8394EDB /* CircleDetectAR */;
+			targetProxy = 8E0642B2755A537D620C3098 /* PBXContainerItemProxy */;
+		};
+		A12DA12565A256EA8A66E841 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 553E6170ECCB12D3F8394EDB /* CircleDetectAR */;
+			targetProxy = E7B194EB702C66440519CE88 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1B6F3E4BD2658E23AF80E72E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = CircleDetectAR/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ironDoug.CircleDetectAR;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		45B94A14E578580FA7A17360 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ironDoug.CircleDetectARTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CircleDetectAR.app/CircleDetectAR";
+			};
+			name = Release;
+		};
+		944A6C9AAD6EB620A8511CA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ironDoug.CircleDetectARUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CircleDetectAR;
+			};
+			name = Release;
+		};
+		9C506EFCF1192F532EA6894C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_FILE = CircleDetectAR/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ironDoug.CircleDetectAR;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		C8ACB59B4AD93E5FAB794BA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ironDoug.CircleDetectARUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CircleDetectAR;
+			};
+			name = Debug;
+		};
+		CDCE7730F0310A3743A8931A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ironDoug.CircleDetectARTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CircleDetectAR.app/CircleDetectAR";
+			};
+			name = Debug;
+		};
+		F4854AFCDF94FCE588299ACA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		FAA66C229F692B50F2D7AC62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2A6C9897B2CD822E91BF6FB6 /* Build configuration list for PBXProject "CircleDetectAR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAA66C229F692B50F2D7AC62 /* Debug */,
+				F4854AFCDF94FCE588299ACA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4C6B8AF358030341384D5338 /* Build configuration list for PBXNativeTarget "CircleDetectARTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDCE7730F0310A3743A8931A /* Debug */,
+				45B94A14E578580FA7A17360 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		DA7D1FA4DF467F9117E4601D /* Build configuration list for PBXNativeTarget "CircleDetectARUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C8ACB59B4AD93E5FAB794BA7 /* Debug */,
+				944A6C9AAD6EB620A8511CA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FD4BD72A5EAF1CAB6A991F2A /* Build configuration list for PBXNativeTarget "CircleDetectAR" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B6F3E4BD2658E23AF80E72E /* Debug */,
+				9C506EFCF1192F532EA6894C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3097B85B956B3CA89ADC9B23 /* Project object */;
+}

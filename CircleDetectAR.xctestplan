@@ -1,0 +1,68 @@
+{
+  "configurations" : [
+    {
+      "id" : "unit-tests",
+      "name" : "Unit Tests",
+      "options" : {
+        "testTimeoutsEnabled" : true,
+        "defaultTestExecutionTimeAllowance" : 15,
+        "maximumTestExecutionTimeAllowance" : 60
+      },
+      "testTargets" : [
+        {
+          "target" : {
+            "name" : "CircleDetectARTests",
+            "projectPath" : "CircleDetectAR.xcodeproj"
+          }
+        }
+      ]
+    },
+    {
+      "id" : "ui-tests",
+      "name" : "UI Tests (Device Required)",
+      "options" : {
+        "testTimeoutsEnabled" : true,
+        "defaultTestExecutionTimeAllowance" : 60,
+        "maximumTestExecutionTimeAllowance" : 120
+      },
+      "testTargets" : [
+        {
+          "target" : {
+            "name" : "CircleDetectARUITests",
+            "projectPath" : "CircleDetectAR.xcodeproj"
+          }
+        }
+      ]
+    },
+    {
+      "id" : "all-tests",
+      "name" : "All Tests",
+      "options" : {
+        "testTimeoutsEnabled" : true,
+        "defaultTestExecutionTimeAllowance" : 60
+      },
+      "testTargets" : [
+        {
+          "target" : {
+            "name" : "CircleDetectARTests",
+            "projectPath" : "CircleDetectAR.xcodeproj"
+          }
+        },
+        {
+          "target" : {
+            "name" : "CircleDetectARUITests",
+            "projectPath" : "CircleDetectAR.xcodeproj"
+          }
+        }
+      ]
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverageEnabled" : true,
+    "targetForVariableExpansion" : {
+      "name" : "CircleDetectAR",
+      "projectPath" : "CircleDetectAR.xcodeproj"
+    }
+  },
+  "version" : 1
+}
