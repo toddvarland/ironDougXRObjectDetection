@@ -78,7 +78,7 @@
 		85EEAA259F1E04B2E20E850F /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
 		8966654349D2C43169CE78E7 /* ModelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelService.swift; sourceTree = "<group>"; };
 		938E819E15AE561C9A8941FC /* CircleDetectARUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleDetectARUITests.swift; sourceTree = "<group>"; };
-		96264EBB91A509A871B19F6B /* CircleDetectAR.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CircleDetectAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		96264EBB91A509A871B19F6B /* CircleDetectAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CircleDetectAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA837D9BB35093350A080DF6 /* ResultHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultHistoryManager.swift; sourceTree = "<group>"; };
 		B71FB54A7CA929883CD65AEE /* ResultHistoryManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultHistoryManagerTests.swift; sourceTree = "<group>"; };
 		BB92CFCBD86446588B58B699 /* CircleGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -426,6 +426,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5Q2YW9392K;
 				INFOPLIST_FILE = CircleDetectAR/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -482,6 +483,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5Q2YW9392K;
 				INFOPLIST_FILE = CircleDetectAR/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
